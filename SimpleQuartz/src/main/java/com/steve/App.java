@@ -8,11 +8,9 @@ import java.util.Collection;
 
 /**
  * Hello world!
- *
  */
-public class App 
-{
-    public static void main( String[] args ) throws SchedulerException {
+public class App {
+    public static void main(String[] args) throws SchedulerException {
 
         SchedulerFactory schedulerFactory = new StdSchedulerFactory();
         Scheduler scheduler = schedulerFactory.getScheduler();
@@ -20,11 +18,11 @@ public class App
         JobDetail jobDetail = JobBuilder.newJob(GetTimeJob.class).withIdentity("get time job").build();
 
         Trigger trigger = TriggerBuilder.newTrigger()
-                                        .withIdentity("cron trigger")
-                                        .withSchedule(CronScheduleBuilder.cronSchedule("*/5 * * * * ?"))
-                                        .startNow()
-                                        .build();
-        scheduler.scheduleJob(jobDetail,trigger);
+                .withIdentity("cron trigger")
+                .withSchedule(CronScheduleBuilder.cronSchedule("*/5 * * * * ?"))
+                .startNow()
+                .build();
+        scheduler.scheduleJob(jobDetail, trigger);
         scheduler.start();
     }
 }

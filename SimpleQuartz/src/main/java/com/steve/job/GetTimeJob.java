@@ -12,7 +12,7 @@ import java.util.Date;
  * @Author: stevejobson
  * @CreateDate: 2018/2/1 上午10:25
  */
-public class GetTimeJob implements Job{
+public class GetTimeJob implements Job {
 
     static final SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
