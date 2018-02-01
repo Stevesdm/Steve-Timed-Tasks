@@ -6,7 +6,6 @@
        default-lazy-init="false" default-autowire="byName">
 
 
-
     <!-- ClusterJobDetail -->
     <bean id="clusterJobDetail"
           class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
@@ -29,23 +28,23 @@
 
     <!-- ClusterCronTriggerBean -->
     <bean id="clusterCronTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="clusterJobDetail" />
-        <property name="cronExpression" value="0/5 * * * * ? *" /> <!-- 每10秒触发一次 -->
+        <property name="jobDetail" ref="clusterJobDetail"/>
+        <property name="cronExpression" value="0/5 * * * * ? *"/> <!-- 每10秒触发一次 -->
     </bean>
 
     <!-- ClusterSchedulerFactoryBean -->
     <bean id="clusterSchedulerFactoryBean" lazy-init="false"
           class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <!-- 指定quartz配置文件 -->
-        <property name="configLocation" value="classpath:quartz.properties" />
+        <property name="configLocation" value="classpath:quartz.properties"/>
         <!--必QuartzScheduler 延时启动，应用启动完后 QuartzScheduler 再启动,单位秒 -->
-        <property name="startupDelay" value="1" />
-        <property name="overwriteExistingJobs" value="true" />
+        <property name="startupDelay" value="1"/>
+        <property name="overwriteExistingJobs" value="true"/>
         <!-- 设置自动启动 -->
-        <property name="autoStartup" value="true" />
+        <property name="autoStartup" value="true"/>
         <property name="triggers">
             <list>
-                <ref bean="clusterCronTriggerBean" />
+                <ref bean="clusterCronTriggerBean"/>
             </list>
         </property>
     </bean>

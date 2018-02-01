@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ImportResource;
 @ImportResource(locations = "classpath:spring-quartz.xml")
 public class QuartzCluster2Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(QuartzCluster2Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(QuartzCluster2Application.class, args);
+    }
 }
