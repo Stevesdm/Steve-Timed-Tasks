@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SpringQuartzCluster.iml" filepath="$PROJECT_DIR$/SpringQuartzCluster.iml" />
+      <module fileurl="file://$PROJECT_DIR$/quartz-cluster-1/quartz-cluster-1.iml" filepath="$PROJECT_DIR$/quartz-cluster-1/quartz-cluster-1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/quartz-cluster-2/quartz-cluster-2.iml" filepath="$PROJECT_DIR$/quartz-cluster-2/quartz-cluster-2.iml" />
+    </modules>
+  </component>
+</project>

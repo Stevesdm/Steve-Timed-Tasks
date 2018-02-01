@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd"
+       default-lazy-init="false" default-autowire="byName">
+
+
+
+    <!-- ClusterJobDetail -->
+    <bean id="clusterJobDetail"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <!-- 指定job的名称 -->
+        <property name="name" value="hw_job"/>
+        <!-- 指定job的分组 -->
+        <property name="group" value="hw_group"/>
+        <!-- 指定具体的job类 -->
+        <property name="jobClass" value="com.steve.quartzcluster.job.HelloJob"/>
+        <!-- 必须设置为true，如果为false，当没有活动的触发器与之关联时会在调度器中会删除该任务  -->
+        <property name="durability" value="true"/>
+
+
+        <!-- 指定spring容器的key，如果不设定在job中的jobmap中是获取不到spring容器的
+        <property name="applicationContextJobDataKey" value="applicationContext"/>-->
+        <!-- 加入上面属性后，启动报错不能序列化  -->
+
+
+    </bean>
+
+    <!-- ClusterCronTriggerBean -->
+    <bean id="clusterCronTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="clusterJobDetail" />
+        <property name="cronExpression" value="0/5 * * * * ? *" /> <!-- 每10秒触发一次 -->
+    </bean>
+
+    <!-- ClusterSchedulerFactoryBean -->
+    <bean id="clusterSchedulerFactoryBean" lazy-init="false"
+          class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <!-- 指定quartz配置文件 -->
+        <property name="configLocation" value="classpath:quartz.properties" />
+        <!--必QuartzScheduler 延时启动，应用启动完后 QuartzScheduler 再启动,单位秒 -->
+        <property name="startupDelay" value="1" />
+        <property name="overwriteExistingJobs" value="true" />
+        <!-- 设置自动启动 -->
+        <property name="autoStartup" value="true" />
+        <property name="triggers">
+            <list>
+                <ref bean="clusterCronTriggerBean" />
+            </list>
+        </property>
+    </bean>
+
+</beans>
